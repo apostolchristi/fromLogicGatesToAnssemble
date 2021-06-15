@@ -9,9 +9,6 @@ This repo contains my implementations of all the gates the authors of the course
 a | b | out
 -----------
 0 | 0 | 1
-
 0 | 1 | 1
-
 1 | 0 | 1
-
 1 | 1 | 0
