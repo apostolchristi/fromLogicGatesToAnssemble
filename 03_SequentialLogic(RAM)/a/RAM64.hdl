@@ -1,0 +1,41 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/RAM64.hdl
+
+/**
+ * Memory of 64 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM64 {
+    IN in[16], load, address[6];
+    OUT out[16];
+
+    PARTS:
+
+   /**Think about RAM's address input as consistingof two fields MSB & LSB;
+		a. One field can be used to select a RAM-part (MSB - Most Significant Bits);
+		b. The otherfield can be used to select a register withtin that RAM-part (LSB - Less Significant Bits)
+	
+															   MSB LSB
+												  address[6] = 000|000
+	*/
+										
+	DMux8Way(in=load, sel=address[3..5], a=loadRAMpart1, b=loadRAMpart2, c=loadRAMpart3, d=loadRAMpart4, 
+										e=loadRAMpart5, f=loadRAMpart6, g=loadRAMpart7, h=loadRAMpart8);
+										
+    RAM8(in=in, load=loadRAMpart1, address=address[0..2], out=ram1out);
+	RAM8(in=in, load=loadRAMpart2, address=address[0..2], out=ram2out);
+	RAM8(in=in, load=loadRAMpart3, address=address[0..2], out=ram3out);
+	RAM8(in=in, load=loadRAMpart4, address=address[0..2], out=ram4out);
+	RAM8(in=in, load=loadRAMpart5, address=address[0..2], out=ram5out);
+	RAM8(in=in, load=loadRAMpart6, address=address[0..2], out=ram6out);
+	RAM8(in=in, load=loadRAMpart7, address=address[0..2], out=ram7out);
+	RAM8(in=in, load=loadRAMpart8, address=address[0..2], out=ram8out);
+	
+	Mux8Way16(a=ram1out, b=ram2out, c=ram3out, d=ram4out,
+				e=ram5out, f=ram6out, g=ram7out, h=ram8out, sel=address[3..5], out=out);
+}
