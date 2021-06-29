@@ -1,0 +1,44 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+	
+	//Incrementor
+	Inc16(in=regout, out=incout);
+	Mux16(a=regout, b=incout, sel=inc, out=incrementalout);
+	
+	//Chosing between previous "incremented" value or "in" value from the client 
+	Mux16(a=incrementalout, b=in, sel=load, out=theinput);
+	
+	//Semafor beats: it choses the "load" for the register looking at control bits "reset" "load" "inc" 
+	Mux(a=inc, b=load, sel=load, out=incloadsemafor);
+	Mux(a=incloadsemafor, b=reset, sel=reset, out=incloadresetsemafor);
+	
+	//Reset button
+	Mux16(a=theinput, b[0..15]=false, sel=reset, out=resetout);
+	
+	//Register
+	Register(in=resetout, load=incloadresetsemafor, out=regout, out=out);
+	
+	
+
+
+	
+	
+	
+	
+}
