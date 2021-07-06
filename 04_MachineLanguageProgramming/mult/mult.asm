@@ -6,18 +6,21 @@
 // Multiplies R0 and R1 and stores the result in R2.
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
-// Pseudo
-//n=R0
-//m=R1
-//i=1
-//prod=0
-//LOOP:
-//if i > m END
-//prod=prod+n
-//i=i+1
-//goto LOOP
-//END:
-//R2=prod
+/* Pseudo Code
+n=R0
+m=R1
+i=1
+prod=0
+
+LOOP:
+if i > m END
+prod=prod+n
+i=i+1
+goto LOOP
+
+END:
+R2=prod
+*/
 
 
 
@@ -26,14 +29,14 @@ D=M
 @n
 M=D	//n=R0
 @END
-D; JLE	// if R0 <= 0 
+D; JLE	// Check: if R0 <= 0 set prod to 0 and stop the program
 
 @R1
 D=M
 @m
 M=D	//m=R1
 @END
-D; JLE  // if R1 <= 0 
+D; JLE  // Check: if R1 <= 0 set prod to 0 and stop the program
 
 @i	
 M=1	//i=1
