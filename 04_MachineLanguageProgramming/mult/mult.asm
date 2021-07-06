@@ -43,11 +43,6 @@ M=0	//prod=0
 
 
 (LOOP)
-@prod
-D=M
-@R2
-M=D		//R2= prod
-
 @i
 D=M
 @m
@@ -76,5 +71,5 @@ M=D		//R2= prod
 0; JMP
 
 (STOP)
-@STOP	//end
+@STOP	// stop the program
 0;JMP
