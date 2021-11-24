@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#include "ctype.h"
 #include "HellperMethods.h"
 #include "SymbolTable.h"
 #include "HashTable/HashTable.h"
@@ -23,11 +25,11 @@ char *hasMoreCommands(char *lineFromFile, size_t const *arrLength);
 
 int reshape_the_string(const char *fileInput, char *instruction);
 
-void string_copy(char *to, char *from);
-
 char *commandType(char *instruction, size_t *length);
 
-void handling_A_instruction(char *a_instruction, size_t *length, short *binary_instruction);
+void handling_Label(char *key, size_t *length, short count_lines, short *binary_instruction);
+
+bool handling_A_instruction(char *a_instruction, size_t *length, short *binary_instruction);
 
 void handling_C_instruction(char *c_instruction, size_t *length, short *binary_instruction);
 

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "HashTable/HashTable.h"
+#include "Parser.h"
 
 #define COMP_ARRAY_LENGTH 6
 #define DESTJUMP_ARRAY_LENGTH 3

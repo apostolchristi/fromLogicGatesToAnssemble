@@ -24,19 +24,6 @@ short string_to_decimal(const char *string, size_t const *length) {
         temp = (temp - asciiZero) * (constant * decimal_units);
         decimal += temp;
     }
-    char *binary_to_string(short *binary_value) {
-
-        const char asciiZero = 48;
-        static char arr[17];
-
-
-        for (int j = 0; j < 16; ++j) {
-            arr[j] = asciiZero + binary_value[j];
-        }
-        arr[16] = '\0';
-        return arr;
-    }
-
 
     return decimal;
 }
@@ -55,9 +42,7 @@ char *_16bitsBinary_to_string(short * binary_value) {
     return arr;
 }
 
-
 void string_copy(char *to, char *from) {
-
     while ((*to++ = *from++));
 }
 
@@ -77,6 +62,7 @@ void decimal_to_16bitsBinary(short const *decimal_num, short *const binary_instr
         binary_instruction[i] = reminder;
         dividend = dividend / divisor;
     }
+
 }
 
 

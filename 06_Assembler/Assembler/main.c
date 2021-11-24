@@ -30,7 +30,7 @@ int start_assembler() {
 
     for (line_length=0; (c = fgetc(pfile_in)) != EOF; ++line_length) {
         fileInputLine[line_length] = c;
-        if(c == '\n') {
+        if(c == '\n' || c == EOF) {
             fileInputLine[line_length]= '\0';
             char *arr = hasMoreCommands(fileInputLine, &line_length);
             if (arr != NULL) fputs(arr, pfile_out);

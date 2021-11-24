@@ -97,6 +97,7 @@ void ht_print(HashTable *table) {
     for (size_t i = 0; i < table->size; i++) {
         printf("@%zu: ", i);
         HashTableItem *item = table->items[i];
+
         while (item) {
             printf("%s => %d | ", item->key, item->value);
             item = item->next;
