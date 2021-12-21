@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="Assembler"/>
+		<Option title="untitled"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -12,16 +12,6 @@
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
 					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -37,26 +27,18 @@
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Assembler">
-				<Option output="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Assembler.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="rebuild_cache">
 				<Option working_dir="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/../../../../lib/../include/w32api"/>
-				</Compiler>
+				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 Assembler"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
 					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Assembler/fast">
-				<Option output="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Assembler.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="untitled">
+				<Option output="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/untitled.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -67,18 +49,63 @@
 					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 Assembler/fast"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 untitled"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="untitled/fast">
+				<Option output="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/untitled.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/10/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 untitled/fast"/>
 					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/e/CLionProjects/C/Challenges/Assembler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/Code.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/Code.h">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/HashTable/HashTable.c">
-			<Option target="Assembler"/>
+			<Option target="untitled"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/HashTable/HashTable.h">
-			<Option target="Assembler"/>
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/HellpeingFunctions.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/HellpeingFunctions.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/Parser.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/Parser.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/SymbolTable.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/SymbolTable.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/main.c">
+			<Option target="untitled"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Assembler/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

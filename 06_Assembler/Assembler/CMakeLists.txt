@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
-project(Assembler C)
+project(untitled C)
 
 set(CMAKE_C_STANDARD 99)
 
-#set (SOURCE_FILES )
-
-add_executable(Assembler main.c Parser.h Code.h Parser.c SymbolTable.h SymbolTable.c HellperMethods.h HellperMethods.c HashTable/HashTable.h HashTable/HashTable.c)
+add_executable(untitled main.c SymbolTable.h SymbolTable.c Parser.h Parser.c Code.h Code.c HellpeingFunctions.h HellpeingFunctions.c HashTable/HashTable.h HashTable/HashTable.c)
