@@ -1,0 +1,8 @@
+//
+// Created by Toor on 1/12/2022.
+//
+
+#ifndef VM_TRANSLATOR_CODEWRITER_H
+#define VM_TRANSLATOR_CODEWRITER_H
+
+#endif //VM_TRANSLATOR_CODEWRITER_H
