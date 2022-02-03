@@ -1,0 +1,12 @@
+//
+// Created by Toor on 2/2/2022.
+//
+
+/*
+ * add sub neg eq get lt and or not
+ */
+
+#ifndef VM_TRANSLATOR_ARITHMETIC_LOGICAL_COMMANDS_H
+#define VM_TRANSLATOR_ARITHMETIC_LOGICAL_COMMANDS_H
+
+#endif //VM_TRANSLATOR_ARITHMETIC_LOGICAL_COMMANDS_H

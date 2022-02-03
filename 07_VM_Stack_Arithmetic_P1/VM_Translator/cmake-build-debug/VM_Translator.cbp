@@ -80,6 +80,12 @@
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/CodeWriter.h">
 			<Option target="VM_Translator"/>
 		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/HashTable/HashTable.c">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/HashTable/HashTable.h">
+			<Option target="VM_Translator"/>
+		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/HellpeingFunctions.c">
 			<Option target="VM_Translator"/>
 		</Unit>
@@ -90,6 +96,24 @@
 			<Option target="VM_Translator"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/Parser.h">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/SymbolTable.c">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/SymbolTable.h">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Arithmetic_Logical_Commands.c">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Arithmetic_Logical_Commands.h">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Memory_Access_Comands.c">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Memory_Access_Comands.h">
 			<Option target="VM_Translator"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/main.c">

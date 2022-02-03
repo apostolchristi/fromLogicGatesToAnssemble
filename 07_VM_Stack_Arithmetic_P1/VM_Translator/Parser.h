@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "HellpeingFunctions.h"
+#include "CodeWriter.h"
 
 
 #ifndef VM_TRANSLATOR_PARSER_H
@@ -26,19 +27,16 @@ bool hasMoreCommands(char *input_file_line, FILE *file_in);
  * Should be called only if hasMoreCommands() is true.
  * Initially there is no current command.
  */
-char *advance(char *input_file_line);
+char *advance(char *input_file_line, char *input_file_name);
 
-
-/* Returns the type of the current command:
- *  - A_COMMAND for @Xxx where Xxx is either a symbol or a decimal number
- *  - C_COMMAND for dest = comp ; jump
- *  - L_COMMAND(actually, pseudo-command) for(Xxx) where Xxx is a symbol
- */
 char *commandType(char *command);
 
 void parse_arg1(char const *command, char *dest_mnemonic);
 
-int parse_arg2(char const *command);
+char *parse_arg2(char const *command);
+
+char *add_comments(char *current_command, char *segment_assembly_code);
+
 
 
 
