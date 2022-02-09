@@ -43,7 +43,7 @@ HashTable *initialize_preDefined_symbolsInstructions() {
     ht_insert(ht, "argument", (void *) "ARG");
     ht_insert(ht, "this", (void *) "THIS");
     ht_insert(ht, "that", (void *) "THAT");
-    ht_insert(ht, "temp", (void *) "5");
+    ht_insert(ht, "temp", (void *) "R5");
 
     return ht;
 

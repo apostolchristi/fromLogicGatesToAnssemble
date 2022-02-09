@@ -7,7 +7,7 @@
 #define C_LENGTH 60 //MAXIMUM possible length of the string
 
 
-char *memoryAccessSegmentType(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
+char *writePushPop(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
 
     //Push
     if (strstr(mnemonic_arg1, "push")) {
@@ -21,6 +21,13 @@ char *memoryAccessSegmentType(char *mnemonic_arg1, char *mnemonic_arg2, char *fi
 
     return NULL;
 }
+
+char *writeArithmetic(char *mnemonic_arg1) {
+
+    return arithmetic_segments(mnemonic_arg1, NULL, NULL);
+}
+
+
 
 
 

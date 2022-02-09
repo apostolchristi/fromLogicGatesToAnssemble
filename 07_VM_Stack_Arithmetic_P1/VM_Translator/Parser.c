@@ -9,7 +9,6 @@
 #define C_LENGTH 60 //MAXIMUM possible length of the string
 
 
-
 void initializer(char const *input_file_dest, char const *output_file_dest) {
 
     FILE *input_file = NULL;
@@ -70,6 +69,8 @@ char *advance(char *input_file_line, char *input_file_name) {
     // Proceeds to parse_arg1() for ALL command_types except "C_RETURN"
     if (strstr(command_type, "C_RETURN") == NULL) {
         parse_arg1(command, mnemonic_arg1);
+        assembly = writeArithmetic(mnemonic_arg1);
+
         printf("%s\n", command);             // test print - remove me!
         printf("%s\n", mnemonic_arg1);       // test print - remove me!
     }
@@ -81,14 +82,17 @@ char *advance(char *input_file_line, char *input_file_name) {
 
         printf("%s\n", mnemonic_arg2);             // test print - remove me!
 
-        assembly =  add_comments(command, memoryAccessSegmentType(mnemonic_arg1, mnemonic_arg2, input_file_name));
-        return assembly;
+        assembly = writePushPop(mnemonic_arg1, mnemonic_arg2, input_file_name);
     }
 
+    assembly = add_comments(command, assembly);
+
+
     free(mnemonic_arg1);mnemonic_arg1 = NULL;
-    free(mnemonic_arg2); mnemonic_arg2 = NULL;
-    free(assembly); assembly = NULL;
-    return NULL;
+    free(mnemonic_arg2);mnemonic_arg2 = NULL;
+//    free(assembly);assembly = NULL;
+
+    return assembly;
 }
 
 
@@ -96,7 +100,7 @@ char *commandType(char *command) {
 
     if (strstr(command, "add") || strstr(command, "sub") || strstr(command, "neg") ||
         strstr(command, "and") || strstr(command, "or") || strstr(command, "not") ||
-        strstr(command, "ea") || strstr(command, "gt") || strstr(command, "lt"))
+        strstr(command, "eq") || strstr(command, "gt") || strstr(command, "lt"))
         return "C_ARITHMETIC";
 
     else if (strstr(command, "push") != NULL)
@@ -130,7 +134,7 @@ char *commandType(char *command) {
 
 void parse_arg1(char const *command, char *dest_mnemonic) {
 
-    while (*(command) != ' ' || !isDigit(command+1)) {
+    while (*(command) != ' ' || !isDigit(command + 1)) {
         *dest_mnemonic++ = *command++;
         if (*command == '\0')
             return;
@@ -200,7 +204,7 @@ char *add_comments(char *current_command, char *segment_assembly_code) {
     strcat(assembly, "\n");
 
     strcat(assembly, segment_assembly_code);
-    *(assembly +strlen(assembly)) = '\0';
+    *(assembly + strlen(assembly)) = '\0';
 
     return assembly;
 

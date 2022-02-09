@@ -10,7 +10,7 @@ char *segment_type = NULL;
 char *assembly_code = NULL;
 
 /* Concatenates to '@' the mnemonic_arg2.
- Assembly ex: "@42" 42 came from VM "push constant 42" command
+ Assembly ex: "@42" 42 came from the VM "push constant 42" command.
  */
 void init_assembly_string(char *mnemonic_arg1, char *mnemonic_arg2) {
 
@@ -100,11 +100,15 @@ char *pop_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char 
 }
 
 
-
+/* Temp_Segment operates between the addresses 5 and 12, so we always start counting from 5
+ addr = 5 + i
+ SP--
+ *addr = *SP
+ */
 void push_temp_segment() {
 
     char *assembly_temp = "D=A\n"
-                          "@5\n"
+                          "@R5\n"
                           "A=D+A\n"
                           "D=M\n"
                           "@SP\n"
@@ -226,7 +230,7 @@ void push_segment_pointers(char *segment_type) {
 void pop_temp_segment(void) {
 
     char *assembly_temp = "D=A\n"
-                          "@5\n"
+                          "@R5\n"
                           "A=D+A\n"
                           "D=A\n"
                           "@addr\n"
