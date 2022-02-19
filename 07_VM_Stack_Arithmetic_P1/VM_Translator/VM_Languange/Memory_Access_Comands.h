@@ -16,8 +16,8 @@
 #include "../SymbolTable.h"
 #include "../HellpeingFunctions.h"
 
-char *push_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name);
-char *pop_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name);
+char *push_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name);
+char *pop_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name);
 void init_assembly_string(char *mnemonic_arg1, char *mnemonic_arg2);
 
 /* Pseudo-segment that holds all the constants in the range 0 ... 32767*/

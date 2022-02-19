@@ -24,7 +24,7 @@ void init_assembly_string(char *mnemonic_arg1, char *mnemonic_arg2) {
 }
 
 
-char *push_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
+char *push_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name) {
 
     init_assembly_string(mnemonic_arg1, mnemonic_arg2);
 
@@ -65,7 +65,7 @@ char *push_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char
 }
 
 
-char *pop_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
+char *pop_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name) {
 
     init_assembly_string(mnemonic_arg1, mnemonic_arg2);
 

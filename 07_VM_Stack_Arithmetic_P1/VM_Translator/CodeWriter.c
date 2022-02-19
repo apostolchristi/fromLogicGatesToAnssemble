@@ -7,7 +7,7 @@
 #define C_LENGTH 60 //MAXIMUM possible length of the string
 
 
-char *writePushPop(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
+char *writePushPop(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name) {
 
     //Push
     if (strstr(mnemonic_arg1, "push")) {
@@ -25,6 +25,18 @@ char *writePushPop(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
 char *writeArithmetic(char *mnemonic_arg1) {
 
     return arithmetic_segments(mnemonic_arg1, NULL, NULL);
+}
+
+
+char *writeBranching(char *mnemonic_arg1, char *mnemonic_arg2) {
+
+   return branching_commands(mnemonic_arg1,mnemonic_arg2);
+}
+
+
+char *writeFunctions(char *mnemonic_arg1, char *mnemonic_arg2) {
+
+return function_commands(mnemonic_arg1, mnemonic_arg2);
 }
 
 

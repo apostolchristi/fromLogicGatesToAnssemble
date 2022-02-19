@@ -4,12 +4,10 @@
 
 #include "Arithmetic_Logical_Commands.h"
 
-#define C_LENGTH 100 //MAXIMUM possible length of the string
+#define C_LENGTH 140 //MAXIMUM possible length of the string
 
 
 char *arithmetic_assembly_code = NULL;
-static int count = 1;
-
 
 char *arithmetic_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
 
@@ -155,11 +153,11 @@ void gt() {
     strcat(arithmetic_assembly_code, assembly_eq_p1);
     strcat(arithmetic_assembly_code, str_count);
     char *assembly_eq_p2 = "\nD;JGT\n"
-                           "D=0\n"
                            "@if_gt_false_";
     strcat(arithmetic_assembly_code, assembly_eq_p2);
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, "\n0;JMP\n");
+    strcat(arithmetic_assembly_code, "\nD=0\n"
+                                     "0;JMP\n");
     strcat(arithmetic_assembly_code, "(if_gt_true_");
     strcat(arithmetic_assembly_code, str_count);
     strcat(arithmetic_assembly_code, ")\n"
@@ -175,7 +173,6 @@ void gt() {
 
 /* Less than: true if x < y, else false */
 void lt() {
-
     static int count = 1;
 
     char *str_count = decimal_to_string(&count);

@@ -53,7 +53,7 @@ bool hasMoreCommands(char *input_file_line, FILE *file_in) {
     return false;
 }
 
-char *advance(char *input_file_line, char *input_file_name) {
+char *advance(char *input_file_line, char const *input_file_name) {
 
     char command[strlen(input_file_line)];
     char *command_type = NULL;
@@ -69,8 +69,10 @@ char *advance(char *input_file_line, char *input_file_name) {
     // Proceeds to parse_arg1() for ALL command_types except "C_RETURN"
     if (strstr(command_type, "C_RETURN") == NULL) {
         parse_arg1(command, mnemonic_arg1);
-        assembly = writeArithmetic(mnemonic_arg1);
 
+        if(strstr(command_type, "C_ARITHMETIC")) {
+            assembly = writeArithmetic(mnemonic_arg1);
+        }
         printf("%s\n", command);             // test print - remove me!
         printf("%s\n", mnemonic_arg1);       // test print - remove me!
     }
@@ -79,10 +81,13 @@ char *advance(char *input_file_line, char *input_file_name) {
     if (strstr(command_type, "C_POP") || strstr(command_type, "C_PUSH") ||
         strstr(command_type, "C_FUNCTION") || strstr(command_type, "C_CALL")) {
         mnemonic_arg2 = parse_arg2(command);
-
         printf("%s\n", mnemonic_arg2);             // test print - remove me!
-
         assembly = writePushPop(mnemonic_arg1, mnemonic_arg2, input_file_name);
+    }
+
+    if (strstr(command_type, "C_LABEL") || strstr(command_type, "C_GOTO") || strstr(command_type, "C_IF")) {
+        mnemonic_arg2 = parse_arg2_branching(command);
+        assembly = writeBranching(mnemonic_arg1, mnemonic_arg2);
     }
 
     assembly = add_comments(command, assembly);
@@ -90,14 +95,13 @@ char *advance(char *input_file_line, char *input_file_name) {
 
     free(mnemonic_arg1);mnemonic_arg1 = NULL;
     free(mnemonic_arg2);mnemonic_arg2 = NULL;
-//    free(assembly);assembly = NULL;
+
 
     return assembly;
 }
 
 
 char *commandType(char *command) {
-
     if (strstr(command, "add") || strstr(command, "sub") || strstr(command, "neg") ||
         strstr(command, "and") || strstr(command, "or") || strstr(command, "not") ||
         strstr(command, "eq") || strstr(command, "gt") || strstr(command, "lt"))
@@ -112,11 +116,11 @@ char *commandType(char *command) {
     else if (strstr(command, "label") != NULL)
         return "C_LABEL";
 
-    else if (strstr(command, "goto") != NULL)
-        return "C_GOTO";
-
     else if (strstr(command, "if") != NULL)
         return "C_IF";
+
+    else if (strstr(command, "goto") != NULL)
+        return "C_GOTO";
 
     else if (strstr(command, "function") != NULL)
         return "C_FUNCTION";
@@ -126,6 +130,7 @@ char *commandType(char *command) {
 
     else if (strstr(command, "call") != NULL)
         return "C_CALL";
+
 
     fprintf(stderr, "There is no such a command: %s", command);
     return NULL;
@@ -147,26 +152,43 @@ char *parse_arg2(char const *command) {
     int digit_length = 0;
 
     //Count digit length in the command
-    while (isDigit(command + command_tail--))
+    while (isDigit(command + command_tail--)) {
         digit_length++;
+    }
 
     //If no digits in the command, drop it!
     if (digit_length == 0) {
-        fprintf(stderr, "Something went wrong parsing arg2: %s", command);
+        fprintf(stderr, "Something went wrong with the command %s\n", command);
         return NULL;
     }
+
+    char *arg2 = calloc(digit_length+2, sizeof(*arg2));
 
     //Bringing tail to the initial length strlen(command)-1;
     command_tail += digit_length + 1;
 
-    char *arg2 = calloc(digit_length, sizeof(*arg2));
 
     for (int i = digit_length - 1; i >= 0; --i)
         arg2[i] = *(command + command_tail--);
 
     arg2[digit_length] = '\n';
+    arg2[digit_length+1] = '\0';
 
     return arg2;
+}
+
+char *parse_arg2_branching(char const *command){
+
+    char *temp = strstr(command, " ");
+    size_t length = strlen(temp);
+    char *arg2 = calloc(length, sizeof(*arg2));
+
+        for (int i = 0; i != length; ++i) {
+            arg2[i] = temp[i+1];
+        }
+
+        arg2[length] = '\0';
+        return arg2;
 }
 
 
@@ -198,8 +220,7 @@ bool reshape_theCommand(char const *fileInput, char *instruction) {
 char *add_comments(char *current_command, char *segment_assembly_code) {
 
     char *assembly = calloc(C_LENGTH, sizeof(*assembly));
-    char *comments = "// ";
-    strcat(assembly, comments);
+    strcat(assembly, "// ");
     strcat(assembly, current_command);
     strcat(assembly, "\n");
 

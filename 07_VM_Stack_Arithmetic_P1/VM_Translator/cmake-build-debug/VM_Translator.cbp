@@ -110,6 +110,18 @@
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Arithmetic_Logical_Commands.h">
 			<Option target="VM_Translator"/>
 		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Branching_Commands.c">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Branching_Commands.h">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Function_Commands.c">
+			<Option target="VM_Translator"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Function_Commands.h">
+			<Option target="VM_Translator"/>
+		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/VM_Translator/VM_Languange/Memory_Access_Comands.c">
 			<Option target="VM_Translator"/>
 		</Unit>

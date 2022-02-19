@@ -27,13 +27,17 @@ bool hasMoreCommands(char *input_file_line, FILE *file_in);
  * Should be called only if hasMoreCommands() is true.
  * Initially there is no current command.
  */
-char *advance(char *input_file_line, char *input_file_name);
+char *advance(char *input_file_line, char const *input_file_name);
 
 char *commandType(char *command);
 
+/* Returns the first argument of the current command. In the case of C_ARITHMETIC, the command itself (add, sub, etc.) is returned.
+ * Should not be called if the current command is C_RETURN */
 void parse_arg1(char const *command, char *dest_mnemonic);
 
 char *parse_arg2(char const *command);
+
+char *parse_arg2_branching(char const *command);
 
 char *add_comments(char *current_command, char *segment_assembly_code);
 
