@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "../HellpeingFunctions.h"
 
-char *branching_commands(char *command, char *command_value);
+char *branching_commands(char *command_type, char *mnemonic_arg1);
 
 
 /* Writes assembly code that effects the "label" command*/

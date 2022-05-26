@@ -23,7 +23,7 @@ void destructor_SymbolTable() {
 }
 
 //TODO| Rename this function name
-void substitute(char **symbol) {
+void segment_type_substitution(char **symbol) {
 
     constructor_SymbolTable();
 

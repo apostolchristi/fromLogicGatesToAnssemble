@@ -20,4 +20,7 @@ char *_16bitsBinary_to_string(short * binary_value);
 
 bool get_basename_of_theFile(char const *fileInput, char *instruction);
 
+char *bootstrap_code();
+void initializer_dir(char const *input_file_dest, char const *output_file_dest);
+
 #endif //ASSEMBLER_HELPPERMETHODS_H

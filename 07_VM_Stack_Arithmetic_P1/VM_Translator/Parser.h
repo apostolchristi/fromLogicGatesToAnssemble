@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <string.h>
+#include <dirent.h>
 #include "HellpeingFunctions.h"
 #include "CodeWriter.h"
 
@@ -33,11 +34,9 @@ char *commandType(char *command);
 
 /* Returns the first argument of the current command. In the case of C_ARITHMETIC, the command itself (add, sub, etc.) is returned.
  * Should not be called if the current command is C_RETURN */
-void parse_arg1(char const *command, char *dest_mnemonic);
+void parse_arg1(char const *command, char const *command_type, char *arg1);
 
 char *parse_arg2(char const *command);
-
-char *parse_arg2_branching(char const *command);
 
 char *add_comments(char *current_command, char *segment_assembly_code);
 

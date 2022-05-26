@@ -20,10 +20,14 @@ char *push_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char
 char *pop_memory_access_segments(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name);
 void init_assembly_string(char *mnemonic_arg1, char *mnemonic_arg2);
 
-/* Pseudo-segment that holds all the constants in the range 0 ... 32767*/
+/* Pseudo-segment that holds all the constants in the range 0... 32767.
+    Emulated by yhe VM implementation; Seen by all the functions in the program
+ */
 void push_constant_segment(void);
 
-/* A two-entry segment that gold the base address of the THIS and THAT segments*/
+/* A two-entry segment that holds the base address of the THIS and THAT segments
+ * Any VM function can set pointer 0 or 1 to some address; this has the effect
+ of aligning the "this" or "that" segment to the heap area beginning in that address.*/
 void push_pointer_segment(char *mnemonic_arg2);
 void pop_pointer_segment(char *mnemonic_arg2);
 
@@ -31,7 +35,8 @@ void pop_pointer_segment(char *mnemonic_arg2);
 void push_static_segment(char *file_name, char *mnemonic_arg2);
 void pop_static_segment(char *file_name, char *mnemonic_arg2);
 
-/* Fixed eight-entry segment that gold temporary variables for general use*/
+/* Fixed eight-entry segment that holds temporary variables for general use.
+ * May be used by any VM function for any purpose. Shared by all functions in the program.*/
 void push_temp_segment(void);
 void pop_temp_segment(void);
 
@@ -41,7 +46,7 @@ void pop_temp_segment(void);
  * THIS (this) and THAT (that): General-purpose segments. Can be made to correspond
  to different areas in the heap. Any VM function can use these segments to manipulate selected areas on the heap.
  */
-void push_segment_pointers(char *segment_type);
+void push_segment_pointers(char *segment_symbol);
 void pop_segment_pointers(char *segment_type);
 
 

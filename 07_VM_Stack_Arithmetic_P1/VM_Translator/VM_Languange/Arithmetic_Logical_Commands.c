@@ -9,47 +9,46 @@
 
 char *arithmetic_assembly_code = NULL;
 
-char *arithmetic_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name) {
+char *arithmetic_segments(char *command) {
 
     arithmetic_assembly_code = calloc(C_LENGTH, sizeof(*arithmetic_assembly_code));
 
     // Addition
-    if (strstr(mnemonic_arg1, "add")) {
+    if (strstr(command, "add")) {
         add();
     }
         // Subtraction
-    else if (strstr(mnemonic_arg1, "sub")) {
+    else if (strstr(command, "sub")) {
         sub();
     }
         //Negation
-    else if (strstr(mnemonic_arg1, "neg")) {
+    else if (strstr(command, "neg")) {
         neg();
     }
         //Equality
-    else if (strstr(mnemonic_arg1, "eq")) {
+    else if (strstr(command, "eq")) {
         eq();
     }
         //Greater
-    else if (strstr(mnemonic_arg1, "gt")) {
+    else if (strstr(command, "gt")) {
         gt();
     }
         //Less
-    else if (strstr(mnemonic_arg1, "lt")) {
+    else if (strstr(command, "lt")) {
         lt();
     }
         //And
-    else if (strstr(mnemonic_arg1, "and")) {
+    else if (strstr(command, "and")) {
         and();
     }
         //Or
-    else if (strstr(mnemonic_arg1, "or")) {
+    else if (strstr(command, "or")) {
         or();
     }
         //Not
-    else if (strstr(mnemonic_arg1, "not")) {
+    else if (strstr(command, "not")) {
         not();
     }
-
 
     return arithmetic_assembly_code;
 }
@@ -63,7 +62,6 @@ void add() {
     char *assembly_add = "@SP\n"
                          "AM=M-1\n"
                          "D=M\n"
-                         "M=0\n"
                          "A=A-1\n"
                          "M=D+M\n";
 
@@ -79,7 +77,6 @@ void sub() {
     char *assembly_sub = "@SP\n"
                          "AM=M-1\n"
                          "D=M\n"
-                         "M=0\n"
                          "A=A-1\n"
                          "M=M-D\n";
 
@@ -112,7 +109,6 @@ void eq() {
     char *assembly_eq_p1 = "@SP\n"
                            "AM=M-1\n"
                            "D=M\n"
-                           "M=0\n"
                            "A=A-1\n"
                            "D=M-D\n"
                            "@if_eq_true_";
@@ -143,31 +139,33 @@ void gt() {
 
     char *str_count = decimal_to_string(&count);
 
-    char *assembly_eq_p1 = "@SP\n"
+    char *assembly_gt_p1 = "@SP\n"
                            "AM=M-1\n"
                            "D=M\n"
-                           "M=0\n"
                            "A=A-1\n"
                            "D=M-D\n"
                            "@if_gt_true_";
-    strcat(arithmetic_assembly_code, assembly_eq_p1);
+    strcat(arithmetic_assembly_code, assembly_gt_p1);
     strcat(arithmetic_assembly_code, str_count);
-    char *assembly_eq_p2 = "\nD;JGT\n"
+    char *assembly_gt_p2 = "\nD;JGT\n"
                            "@if_gt_false_";
-    strcat(arithmetic_assembly_code, assembly_eq_p2);
+    strcat(arithmetic_assembly_code, assembly_gt_p2);
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, "\nD=0\n"
-                                     "0;JMP\n");
+    char *assembly_gt_p3 = "\nD=0\n"
+                           "0;JMP\n";
+    strcat(arithmetic_assembly_code, assembly_gt_p3);
     strcat(arithmetic_assembly_code, "(if_gt_true_");
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, ")\n"
-                                     "D=-1\n"
-                                     "(if_gt_false_");
+    char *assembly_gt_p4 = ")\n"
+                           "D=-1\n"
+                           "(if_gt_false_";
+    strcat(arithmetic_assembly_code, assembly_gt_p4);
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, ")\n"
-                                     "@SP\n"
-                                     "A=M-1\n"
-                                     "M=D\n");
+    char *assembly_gt_p5 = ")\n"
+                           "@SP\n"
+                           "A=M-1\n"
+                           "M=D\n";
+    strcat(arithmetic_assembly_code, assembly_gt_p5);
     count++;
 }
 
@@ -177,75 +175,65 @@ void lt() {
 
     char *str_count = decimal_to_string(&count);
 
-    char *assembly_eq_p1 = "@SP\n"
+    char *assembly_lt_p1 = "@SP\n"
                            "AM=M-1\n"
                            "D=M\n"
-                           "M=0\n"
                            "A=A-1\n"
                            "D=M-D\n"
-                           "@if_lt_true";
-    strcat(arithmetic_assembly_code, assembly_eq_p1);
+                           "@if_lt_true_";
+    strcat(arithmetic_assembly_code, assembly_lt_p1);
     strcat(arithmetic_assembly_code, str_count);
-    char *assembly_eq_p2 = "\nD;JLT\n"
-                           "D=0\n"
+    char *assembly_lt_p2 = "\nD;JLT\n"
                            "@if_lt_false_";
-    strcat(arithmetic_assembly_code, assembly_eq_p2);
+    strcat(arithmetic_assembly_code, assembly_lt_p2);
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, "\n0;JMP\n");
-    strcat(arithmetic_assembly_code, "(if_lt_true");
+    char *assembly_lt_p3 = "\nD=0\n"
+                           "0;JMP\n";
+    strcat(arithmetic_assembly_code, assembly_lt_p3);
+    strcat(arithmetic_assembly_code, "(if_lt_true_");
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, ")\n"
-                                     "D=-1\n"
-                                     "(if_lt_false_");
+    char *assembly_lt_p4 = ")\n"
+                           "D=-1\n"
+                           "(if_lt_false_";
+    strcat(arithmetic_assembly_code, assembly_lt_p4);
     strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, ")\n"
-                                     "@SP\n"
-                                     "A=M-1\n"
-                                     "M=D\n");
+    char *assembly_lt_p5 = ")\n"
+                           "@SP\n"
+                           "A=M-1\n"
+                           "M=D\n";
+    strcat(arithmetic_assembly_code, assembly_lt_p5);
     count++;
 
 }
 
 /* Bit-wise: x And y */
 void and() {
-    eq();
+    char *assembly_and = "@SP\n"
+                         "AM=M-1\n"
+                         "D=M\n"
+                         "A=A-1\n"
+                         "D=D&M\n"
+                         "@SP\n"
+                         "A=M-1\n"
+                         "M=D\n";
+    strcat(arithmetic_assembly_code, assembly_and);
 }
 
+/* Bit-wise: x Or y */
 void or() {
 
-    static int count = 1;
+    char *assembly_or = "@SP\n"
+                        "AM=M-1\n"
+                        "D=M\n"
+                        "A=A-1\n"
+                        "D=D|M\n"
+                        "@SP\n"
+                        "A=M-1\n"
+                        "M=D\n";
+    strcat(arithmetic_assembly_code, assembly_or);
 
-    char *str_count = decimal_to_string(&count);
-
-    char *assembly_eq_p1 = "@SP\n"
-                           "AM=M-1\n"
-                           "D=M\n"
-                           "M=0\n"
-                           "A=A-1\n"
-                           "D=D|M\n"
-                           "@if_or_true";
-    strcat(arithmetic_assembly_code, assembly_eq_p1);
-    strcat(arithmetic_assembly_code, str_count);
-    char *assembly_eq_p2 = "\nD;JNE\n"
-                           "D=0\n"
-                           "@if_or_false_";
-    strcat(arithmetic_assembly_code, assembly_eq_p2);
-    strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, "\n0;JMP\n");
-    strcat(arithmetic_assembly_code, "(if_or_true");
-    strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, ")\n"
-                                     "D=-1\n"
-                                     "(if_or_false_");
-    strcat(arithmetic_assembly_code, str_count);
-    strcat(arithmetic_assembly_code, ")\n"
-                                     "@SP\n"
-                                     "A=M-1\n"
-                                     "M=D\n");
-    count++;
 }
 
-//TODO: make sure the impl of this method is correct (on assembly level).
 /* Bit-wise: Not y */
 void not() {
 

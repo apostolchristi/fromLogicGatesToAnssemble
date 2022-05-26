@@ -18,20 +18,21 @@
 
 /* Informs the code writer that the translation of a new VM file is started. */
 void setFileName(char *fileName);
-void writeInit();
+char *writeInit();
 
+char *writeDelegator(char *command_type, char *arg1, char *arg2, char const *file_name);
 
 /* Writes assembly code that is the translation of the given commands, where command is either C_PUSH or C_POP. */
-char *writePushPop(char *mnemonic_arg1, char *mnemonic_arg2, char const *file_name);
+char *writePushPop(char *command_type, char *arg1, char *arg2, char const *file_name);
 
 /* Writes assembly code that is the translation of the given arithmetic commands.*/
 char *writeArithmetic(char *command);
 
 /* Writes assembly code that effects the "label" or "goto" or "if-goto commands*/
-char *writeBranching(char *mnemonic_arg1, char *mnemonic_arg2);
+char *writeBranching(char *arg1, char *arg2);
 
 /* Writes assembly code that effects the "call", "return" and "function" commands */
-char *writeFunctions(char *mnemonic_arg1, char *mnemonic_arg2);
+char *writeFunctions(char *command_type, char *arg1, char *arg2);
 
 
 

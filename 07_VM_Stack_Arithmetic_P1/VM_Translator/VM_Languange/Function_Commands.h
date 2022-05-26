@@ -15,15 +15,18 @@
 #include <stdio.h>
 #include "../HellpeingFunctions.h"
 
-char *function_commands(char *command, char *command_value);
+void bootstrap();
+
+
+char *function_commands(char *command_type, char *arg1, char *arg2);
 
 /* Write assembly code that effects the "call" command*/
-void writeCall(char *functionName, int numArgs);
-
-/* Write assembly code that effects the "return" command*/
-void writeReturn(void);
+void writeCall(char *functionName, char *nArgs);
 
 /* Write assembly code that effects the "function" command*/
-void writeFunction(char *functionName, int numLocals);
+void writeFunction(char *functionName, char *nArgs);
+
+/* Write assembly code that effects the "return" command*/
+void writeReturn(char *functionName);
 
 #endif //VM_TRANSLATOR_FUNCTION_COMMANDS_H

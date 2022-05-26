@@ -7,23 +7,23 @@
 
 char *branching_assembly_code = NULL;
 
-char *branching_commands(char *mnemonic_arg1, char *mnemonic_arg2) {
+char *branching_commands(char *command_type, char *mnemonic_arg1) {
 
     branching_assembly_code = calloc(C_LENGTH, sizeof(*branching_assembly_code));
 
     //label
-    if (strstr(mnemonic_arg1, "label")) {
-       writeLabel(mnemonic_arg2);
+    if (strstr(command_type, "C_LABEL")) {
+       writeLabel(mnemonic_arg1);
     }
 
     //if_goto
-    else if (strstr(mnemonic_arg1, "if")) {
-        writeIf(mnemonic_arg2);
+    else if (strstr(command_type, "C_IF")) {
+        writeIf(mnemonic_arg1);
     }
 
     //goto
-    else if (strstr(mnemonic_arg1, "goto")) {
-       writeGoto(mnemonic_arg2);
+    else if (strstr(command_type, "C_GOTO")) {
+       writeGoto(mnemonic_arg1);
     }
 
     return branching_assembly_code;

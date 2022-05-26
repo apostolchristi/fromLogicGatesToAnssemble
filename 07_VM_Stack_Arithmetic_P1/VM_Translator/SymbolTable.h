@@ -11,7 +11,7 @@
 
 void constructor_SymbolTable();
 void destructor_SymbolTable();
-void substitute(char **symbol);
+void segment_type_substitution(char **symbol);
 
 
 HashTable *initialize_preDefined_symbolsInstructions();

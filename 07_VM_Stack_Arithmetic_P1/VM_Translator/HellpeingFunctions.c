@@ -70,6 +70,70 @@ bool get_basename_of_theFile(char const *fileInput, char *instruction) {
     return 0;
 }
 
+// This initializer works the same way as does the one from Parser file, only this one can read files from directories
+void initializer_dir(char const *input_file_dest, char const *output_file_dest) {
+
+    DIR *input_dir = opendir(input_file_dest);
+    FILE *input_file = NULL;
+    FILE *output_file = NULL;
+
+    char input_file_line[INPUT_LENGTH];
+    char *input_file_name = NULL;
+    struct dirent *de;
+
+
+    if (input_dir == NULL) {
+        printf("Could not open current directory");
+        exit(1);
+    }
+
+    output_file = fopen(output_file_dest, "w");
+    if (output_file == NULL) {
+        fprintf(stderr, "Failed to open_asm_file %s\n", output_file_dest);
+        exit(1);
+    }
+
+    //Bootstrap Code
+    fputs(writeInit(), output_file);
+
+    while ((de = readdir(input_dir)) != NULL) {
+
+        if (strstr(de->d_name, ".vm") != NULL) {
+            printf("%s\n", de->d_name);
+            input_file_name = (char *) calloc(200, sizeof(*input_file_name));
+
+            strcat(input_file_name, input_file_dest);
+            strcat(input_file_name, "\\");
+            strcat(input_file_name, de->d_name);
+
+            input_file = fopen(input_file_name, "r");
+            if (input_file == NULL) {
+                fprintf(stderr, "Failed to open_asm_file %s\n", input_file_dest);
+                exit(1);
+            }
+
+/* ----------------------> Action begins here <---------------------------*/
+            while (hasMoreCommands(input_file_line, input_file) == true) {
+                char *output = advance(input_file_line, input_file_dest);
+                if (output != NULL) {
+                    fputs(output, output_file);
+                }
+
+            }
+/* -----------------------------------------------------------------------*/
+            fclose(input_file);
+            input_file = NULL;
+            free(input_file_name);
+            input_file_name = NULL;
+        }
+
+    }
+    fclose(output_file);
+    output_file = NULL;
+    closedir(input_dir);
+
+}
+
 
 
 

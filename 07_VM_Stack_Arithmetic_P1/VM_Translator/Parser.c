@@ -5,9 +5,9 @@
 #include "Parser.h"
 
 #define INPUT_LENGTH 127    //maximum allowed length of the input file line
-#define MNEMONIC_LENGTH 14   //maximum allowed length of the mnemonic
-#define C_LENGTH 60 //MAXIMUM possible length of the string
-
+#define ARG1_LENGTH 14   //maximum allowed length of the mnemonic
+#define C_LENGTH 60         //MAXIMUM possible length of the string
+#define COMMAND_LENGTH 8      //Maximum allowed length of the command
 
 void initializer(char const *input_file_dest, char const *output_file_dest) {
 
@@ -15,6 +15,7 @@ void initializer(char const *input_file_dest, char const *output_file_dest) {
     FILE *output_file = NULL;
 
     char input_file_line[INPUT_LENGTH];
+
 
     input_file = fopen(input_file_dest, "r");
     if (input_file == NULL) {
@@ -28,16 +29,17 @@ void initializer(char const *input_file_dest, char const *output_file_dest) {
         exit(1);
     }
 
+    //Bootstrap Code
+    fputs(writeInit(), output_file);
 /* ----------------------> Action begins here <---------------------------*/
-
     while (hasMoreCommands(input_file_line, input_file) == true) {
         char *output = advance(input_file_line, input_file_dest);
-        if (output != NULL)
+        if (output != NULL) {
             fputs(output, output_file);
+        }
+
     }
-
 /* -----------------------------------------------------------------------*/
-
     fclose(input_file);
     fclose(output_file);
     input_file = NULL;
@@ -47,101 +49,109 @@ void initializer(char const *input_file_dest, char const *output_file_dest) {
 
 bool hasMoreCommands(char *input_file_line, FILE *file_in) {
 
-    if (fgets(input_file_line, INPUT_LENGTH, file_in) != NULL)
+    if (fgets(input_file_line, INPUT_LENGTH, file_in) != NULL) {
         return true;
-
+    }
     return false;
 }
+
 
 char *advance(char *input_file_line, char const *input_file_name) {
 
     char command[strlen(input_file_line)];
     char *command_type = NULL;
     char *assembly = NULL;
-    char *mnemonic_arg1 = (char *) calloc(MNEMONIC_LENGTH, sizeof(*mnemonic_arg1));
-    char *mnemonic_arg2 = NULL;
+    char *arg1 = (char *) calloc(ARG1_LENGTH, sizeof(*arg1));
+    char *arg2 = NULL;
+
 
     //Cleaning the input_file_line of garbage. At the same time it checks if it's a real command
     if (reshape_theCommand(input_file_line, command) == true) {
         command_type = commandType(command);
+    } else {
+        return assembly;
     }
 
     // Proceeds to parse_arg1() for ALL command_types except "C_RETURN"
-    if (strstr(command_type, "C_RETURN") == NULL) {
-        parse_arg1(command, mnemonic_arg1);
-
-        if(strstr(command_type, "C_ARITHMETIC")) {
-            assembly = writeArithmetic(mnemonic_arg1);
-        }
-        printf("%s\n", command);             // test print - remove me!
-        printf("%s\n", mnemonic_arg1);       // test print - remove me!
+    if (strcmp(command_type, "C_RETURN") != 0) {
+        parse_arg1(command, command_type, arg1);
     }
-
     // Proceeds to parse_arg2() ONLY for mentioned command_types
-    if (strstr(command_type, "C_POP") || strstr(command_type, "C_PUSH") ||
-        strstr(command_type, "C_FUNCTION") || strstr(command_type, "C_CALL")) {
-        mnemonic_arg2 = parse_arg2(command);
-        printf("%s\n", mnemonic_arg2);             // test print - remove me!
-        assembly = writePushPop(mnemonic_arg1, mnemonic_arg2, input_file_name);
+    if (strcmp(command_type, "C_POP") == 0 || strcmp(command_type, "C_PUSH") == 0 ||
+        strcmp(command_type, "C_FUNCTION") == 0 || strcmp(command_type, "C_CALL") == 0) {
+        arg2 = parse_arg2(command);
     }
 
-    if (strstr(command_type, "C_LABEL") || strstr(command_type, "C_GOTO") || strstr(command_type, "C_IF")) {
-        mnemonic_arg2 = parse_arg2_branching(command);
-        assembly = writeBranching(mnemonic_arg1, mnemonic_arg2);
-    }
-
+    assembly = writeDelegator(command_type, arg1, arg2, input_file_name);
     assembly = add_comments(command, assembly);
 
-
-    free(mnemonic_arg1);mnemonic_arg1 = NULL;
-    free(mnemonic_arg2);mnemonic_arg2 = NULL;
-
+    free(arg1);arg1 = NULL;
+    free(arg2);arg2 = NULL;
 
     return assembly;
 }
 
 
 char *commandType(char *command) {
-    if (strstr(command, "add") || strstr(command, "sub") || strstr(command, "neg") ||
-        strstr(command, "and") || strstr(command, "or") || strstr(command, "not") ||
-        strstr(command, "eq") || strstr(command, "gt") || strstr(command, "lt"))
+
+    char *command_type = calloc(COMMAND_LENGTH, sizeof(*command_type));
+
+    //Copy initial command up to the ' ' = "space"
+    for (int i = 0; *command != ' '; ++i) {
+        *(command_type + i) = *command++;
+    }
+
+    if (strstr(command_type, "add") != NULL || strstr(command_type, "sub") != NULL ||
+        strstr(command_type, "neg") != NULL || strstr(command_type, "and") != NULL ||
+        strstr(command_type, "or") != NULL || strstr(command_type, "not") != NULL ||
+        strstr(command_type, "eq") != NULL || strstr(command_type, "gt") != NULL ||
+        strstr(command_type, "lt") != NULL )  {
+//        free(command_type);
         return "C_ARITHMETIC";
-
-    else if (strstr(command, "push") != NULL)
+    } else if (strstr(command_type, "push") != NULL) {
+        free(command_type);
         return "C_PUSH";
-
-    else if (strstr(command, "pop") != NULL)
+    } else if (strstr(command_type, "pop") != NULL) {
+        free(command_type);
         return "C_POP";
-
-    else if (strstr(command, "label") != NULL)
+    } else if (strstr(command_type, "label") != NULL) {
+        free(command_type);
         return "C_LABEL";
-
-    else if (strstr(command, "if") != NULL)
+    } else if (strstr(command_type, "if") != NULL) {
+        free(command_type);
         return "C_IF";
-
-    else if (strstr(command, "goto") != NULL)
+    } else if (strstr(command_type, "goto") != NULL) {
+        free(command_type);
         return "C_GOTO";
-
-    else if (strstr(command, "function") != NULL)
+    } else if (strstr(command_type, "function") != NULL) {
+        free(command_type);
         return "C_FUNCTION";
-
-    else if (strstr(command, "return") != NULL)
+    } else if (strstr(command_type, "return") != NULL) {
+//        free(command_type);
         return "C_RETURN";
-
-    else if (strstr(command, "call") != NULL)
+    } else if (strstr(command_type, "call") != NULL) {
+        free(command_type);
         return "C_CALL";
+    }
 
-
-    fprintf(stderr, "There is no such a command: %s", command);
+    fprintf(stderr, "There is no such a command: %s", command_type);
     return NULL;
-
 }
 
-void parse_arg1(char const *command, char *dest_mnemonic) {
+void parse_arg1(char const *command, char const *command_type, char *arg1) {
 
-    while (*(command) != ' ' || !isDigit(command + 1)) {
-        *dest_mnemonic++ = *command++;
-        if (*command == '\0')
+    if(strcmp(command_type, "C_ARITHMETIC") == 0) {
+        strcpy(arg1, command);
+        return;
+    }
+
+    char *temp_arg1 = strstr(command, " ");
+    if(*temp_arg1 == ' ')
+        temp_arg1++;
+
+    while (*(temp_arg1) != ' ' || !isDigit(temp_arg1 + 1)) {
+        *arg1++ = *temp_arg1++;
+        if (*temp_arg1 == '\0')
             return;
     }
 }
@@ -162,33 +172,18 @@ char *parse_arg2(char const *command) {
         return NULL;
     }
 
-    char *arg2 = calloc(digit_length+2, sizeof(*arg2));
+    char *arg2 = calloc(digit_length + 2, sizeof(*arg2));
 
     //Bringing tail to the initial length strlen(command)-1;
     command_tail += digit_length + 1;
-
 
     for (int i = digit_length - 1; i >= 0; --i)
         arg2[i] = *(command + command_tail--);
 
     arg2[digit_length] = '\n';
-    arg2[digit_length+1] = '\0';
+    arg2[digit_length + 1] = '\0';
 
     return arg2;
-}
-
-char *parse_arg2_branching(char const *command){
-
-    char *temp = strstr(command, " ");
-    size_t length = strlen(temp);
-    char *arg2 = calloc(length, sizeof(*arg2));
-
-        for (int i = 0; i != length; ++i) {
-            arg2[i] = temp[i+1];
-        }
-
-        arg2[length] = '\0';
-        return arg2;
 }
 
 
@@ -199,16 +194,19 @@ bool reshape_theCommand(char const *fileInput, char *instruction) {
 
 
     for (int i = 0, j = 0; *fileInput != '\0'; i++) {
-        if (fileInput[i] == '\t') {   //if tabs
+        if (fileInput[i] == '\t') {   // if tabs
             instruction[i] = '\0';
             continue;
-        } else if (fileInput[i] == '/' && fileInput[i + 1] == '/') { //if comments after the code
+        } else if (fileInput[i] == '/' && fileInput[i + 1] == '/') { // if comments after the code
+            instruction[j] = '\0';
+            return 1;
+        } else if (fileInput[i] == ' ' && fileInput[i+1] == ' ') { // if 2 spaces after the code
             instruction[j] = '\0';
             return 1;
         }
 
         instruction[j++] = fileInput[i];
-        if (fileInput[i] == '\r' || fileInput[i] == '\t' || fileInput[i] == '\n') {
+        if (fileInput[i] == '\r' || fileInput[i] == '\t' || fileInput[i] == '\n'){
             instruction[--j] = '\0';
             if (*instruction == '\0') return 0;
             return 1;
@@ -228,5 +226,4 @@ char *add_comments(char *current_command, char *segment_assembly_code) {
     *(assembly + strlen(assembly)) = '\0';
 
     return assembly;
-
 }

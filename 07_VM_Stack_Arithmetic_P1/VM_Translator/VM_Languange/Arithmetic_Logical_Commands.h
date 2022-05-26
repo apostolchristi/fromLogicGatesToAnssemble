@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include "../HellpeingFunctions.h"
 
-char *arithmetic_segments(char *mnemonic_arg1, char *mnemonic_arg2, char *file_name);
+char *arithmetic_segments(char *command);
 
 
 
