@@ -17,21 +17,17 @@ bool list_addItem(List *list, char *value) {
 
     for (int i = 0; i <= list->index; ++i) {
         if (list->data[i] == NULL) {
-            list->data[i] = value;
+            list->data[i] = malloc(strlen(value)+1 * sizeof(char));
+            strcpy(list->data[i], value);
             list->index++;
             return 1;
-        } else if (strcmp(list->data[i], value) == 0) {
-            return 0;
         }
     }
 
-    list->data[list->index] = value;
-    list->index++;
+//    list->data[list->index] = value;
+//    list->index++;
 
-    list->data[list->index] = value;
-//    *(list->data+list->index) = value; // same as the line above but expressed as a pointer arithmetic
-    list->index++;
-    return 1;
+    return 0;
 }
 
 bool list_lookup(List *list, char *name) {
@@ -56,6 +52,9 @@ void list_print(List *list) {
 }
 
 bool list_delete(List *list) {
+    for (int i = 0; i < list->index ; ++i) {
+        free(list->data[i]);
+    }
 
     free(list->data);
     free(list); list = NULL;

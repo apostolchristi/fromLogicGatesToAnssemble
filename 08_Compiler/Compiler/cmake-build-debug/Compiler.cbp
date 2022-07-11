@@ -86,22 +86,22 @@
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/DataStructure/HashTable.h">
 			<Option target="Compiler"/>
 		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/DataStructure/LinkedList.c">
+			<Option target="Compiler"/>
+		</Unit>
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/DataStructure/LinkedList.h">
+			<Option target="Compiler"/>
+		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/DataStructure/List.c">
 			<Option target="Compiler"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/DataStructure/List.h">
 			<Option target="Compiler"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/HellpingFunctions.c">
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/TokenCode.c">
 			<Option target="Compiler"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/HellpingFunctions.h">
-			<Option target="Compiler"/>
-		</Unit>
-		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/Token_Parser.c">
-			<Option target="Compiler"/>
-		</Unit>
-		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/Token_Parser.h">
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/TokenCode.h">
 			<Option target="Compiler"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/Tokenizer.c">
@@ -110,10 +110,10 @@
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/Tokenizer.h">
 			<Option target="Compiler"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/Tokens_Table.c">
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/Parser/CompilationEngine.c">
 			<Option target="Compiler"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/LexycalAnalysis/Tokens_Table.h">
+		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/SyntaxAnalyzer/Parser/CompilationEngine.h">
 			<Option target="Compiler"/>
 		</Unit>
 		<Unit filename="/cygdrive/e/CLionProjects/C/Challenges/Compiler/main.c">
