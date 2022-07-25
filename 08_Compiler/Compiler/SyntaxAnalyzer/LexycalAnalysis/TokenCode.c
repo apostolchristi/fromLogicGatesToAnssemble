@@ -38,7 +38,7 @@ void TokenCode_destructor() {
 
     if(symbol_list != NULL) {
         list_delete(symbol_list);
-        keyword_list = NULL;
+        symbol_list = NULL;
     }
 
     if(token_list != NULL) {
@@ -59,7 +59,7 @@ char *token_parser(char *input_file_line, int *index) {
     *nextSymbol = input_file_line[*index+1];
 
     //if any comments at the beginning or empty line THEN exit;
-    if ((*currentSymbol == '/' && *nextSymbol == '/') || *currentSymbol == '\r' || *currentSymbol == '\n') {
+    if ((*currentSymbol == '/' && *nextSymbol == '/') || (*currentSymbol == '/' && *nextSymbol == '*') || *currentSymbol == '\r' || *currentSymbol == '\n') {
         return NULL;
     }
 
@@ -192,6 +192,30 @@ char *decimal_to_string(int *decimal) {
 }
 
 
+void symbol(char *token) {
+
+    char *new_token = NULL;
+
+    if (*token == '<' || *token == '>' || *token == '\"' || *token == '&') {
+        switch (*token) {
+            case '<':
+                new_token = "&lt";
+                break;
+            case '>':
+                new_token = "&gt";
+                break;
+            case '\"':
+                new_token = "&quot";
+                break;
+            case '&':
+                new_token = "&amp";
+                break;
+        }
+        token = realloc(token, strlen(new_token));
+        strcpy(token, new_token);
+    }
+}
+
 char *terminalTagBuilder(char *token, char *token_type) {
 
     char *line = (char *) calloc(TOKEN_LENGTH, sizeof(*line));
@@ -318,16 +342,10 @@ LinkedList getTokenList() {
 }
 
 char *getNextToken() {
-    LinkedList current = token_list;
-    char *token = NULL;
-
-    static int index = 0;
-
-    for (int i = 0; i <= index; ++i) {
-        token = current->data;
-        current = current->next;
+    if(token_list != NULL) {
+        char *token = token_list->data;
+        token_list = token_list->next;
+        return token;
     }
-
-    index++;
-    return token;
+    return NULL;
 }

@@ -13,41 +13,44 @@ void Tokenizer_initializer(char const *input) {
 
     FILE *input_file = NULL;
     DIR *input_dir = NULL;
-    FILE *output_file = NULL;
     char *file_pathName = NULL;
     struct dirent *dir_file;
 
-    TokenCode_constructor();
 
     //Reads a File
     if (strstr(input, ".jack") != NULL) {
+        TokenCode_constructor();
         input_file = openFile(input, "r");
         file_pathName = setFilePath(input, "w", NULL);
-        output_file = openFile(file_pathName, "w");
 
         while (hasMoreTokens(input_file)) {
             Tokenizer_advance();
         }
+
         CompilationEngine_constructor(file_pathName);
     }
         //Reads a Directory
     else if ((input_dir = openDir(input)) != NULL) {
         while ((dir_file = readdir(input_dir)) != NULL) {
             if (strstr(dir_file->d_name, ".jack") != NULL) {
+                TokenCode_constructor();
                 file_pathName = setFilePath(input, "r", dir_file->d_name);
                 input_file = openFile(file_pathName, "r");
                 file_pathName = setFilePath(file_pathName, "w", NULL);
-                output_file = openFile(file_pathName, "w");
+
+                while (hasMoreTokens(input_file)) {
+                    Tokenizer_advance();
+                }
+                CompilationEngine_constructor(file_pathName);
+
+                TokenCode_destructor();
             }
         }
     }
 
     fclose(input_file);
-    input_file = NULL;
     free(file_pathName);
-    file_pathName = NULL;
     closedir(input_dir);
-    input_dir = NULL;
 
     TokenCode_destructor();
 
@@ -93,27 +96,3 @@ char *tokenType(char *token) {
     return NULL;
 }
 
-void symbol(char *token) {
-
-    char *new_token = NULL;
-
-    if (*token == '<' || *token == '>' || *token == '\"' || *token == '&') {
-        switch (*token) {
-            case '<':
-                new_token = "&lt";
-                break;
-            case '>':
-                new_token = "&gt";
-                break;
-            case '\"':
-                new_token = "&quot";
-                break;
-            case '&':
-                new_token = "&amp";
-                break;
-        }
-        token = realloc(token, strlen(new_token));
-        strcpy(token, new_token);
-    }
-
-}

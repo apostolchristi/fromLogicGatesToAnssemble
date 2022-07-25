@@ -33,6 +33,8 @@ bool isStringConstant(char *str);
 bool isDigit(char const *value);
 int string_to_decimal(const char *string);
 char *decimal_to_string(int *decimal);
+void symbol(char *token);
+
 
 char *token_parser(char *input_file_line, int *index);
 char *terminalTagBuilder(char *token, char *token_type);

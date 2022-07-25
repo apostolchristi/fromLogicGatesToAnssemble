@@ -45,6 +45,7 @@
 
 
 void CompilationEngine_constructor(char *file_pathName);
+void CompilationEngine_destructor();
 /* ---------------------------------------------Program structure------------------------------------------------------*/
 
 /* Compiles a complete class. */
@@ -105,7 +106,7 @@ void compileExpression();
 */
 void compileTerm();
 
-void compileSubroutineCall();
+void compileSubroutineCall(char *next_token);
 
 /* Compiles a (possibly empty) comma-separated list of expressions. */
 void compileExpressionList();
@@ -113,7 +114,7 @@ void compileExpressionList();
 
 /* -----------------------------------------------Routine--------------------------------------------------------*/
 bool isType();
-bbool isOp();
+bool isOp();
 void eatMultipleVarName();
 void eatSemicolonSymbol();
 void eatEqualSymbol();

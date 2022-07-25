@@ -4,11 +4,14 @@
 
 #include "LinkedList.h"
 
+static char flag;
+
 LinkedList create_LinkedList(void) {
 
     LinkedList newNode = malloc(sizeof(node_t));
     newNode->data = NULL;
     newNode->next = NULL;
+    flag = 1;
     return newNode;
 }
 
@@ -16,7 +19,6 @@ void insert_AtEndOf_LinkedList(LinkedList *head, char *data) {
     LinkedList current = *head;
 
     //Only once for head
-    static char flag = 1;
     if (flag == 1) {
         current->data = malloc(strlen(data) * sizeof(*data) + 1);
         strcpy(current->data, data);
@@ -68,6 +70,8 @@ void delete_LinkedList(LinkedList *head) {
         return;
     }
 
+    flag = 1;
+
     while (*head != NULL) {
         temPtr = *head; /* hold onto node being removed*/
         *head = (*head)->next;  /* de-thread the node*/
@@ -76,3 +80,4 @@ void delete_LinkedList(LinkedList *head) {
     }
 
 }
+

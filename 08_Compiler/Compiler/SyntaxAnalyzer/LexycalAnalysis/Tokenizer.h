@@ -32,7 +32,6 @@ void Tokenizer_advance();
 */
 char *tokenType(char *token);
 
-void symbol(char *token);
 
 
 #endif //COMPILER_TOKENIZER_H

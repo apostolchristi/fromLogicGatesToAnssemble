@@ -7,7 +7,7 @@ const char *OUTPUT_FILE = "C:\\Users\\Toor\\Desktop\\out-ASM-code.txt";
 
 int main() {
 
-    Tokenizer_initializer(INPUT_FILE);
+    Tokenizer_initializer(INPUT_DIR);
 
 
     return 0;
